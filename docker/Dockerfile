@@ -1,5 +1,8 @@
 FROM quay.io/pypa/manylinux2010_x86_64
 
+# requirements from https://github.com/pyenv/pyenv/wiki
+RUN yum install gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel
+
 # install pyenv
 RUN curl https://pyenv.run | bash
 
