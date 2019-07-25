@@ -5,13 +5,13 @@ FROM ubuntu:12.04
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
     make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
-    wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-
-RUN apt-get install -y git
+    wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev \
+    git
 
 # install pyenv
 RUN curl https://pyenv.run | bash
 
+# load pyenv
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
