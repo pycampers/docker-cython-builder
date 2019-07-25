@@ -10,10 +10,10 @@ RUN curl https://pyenv.run | bash
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
+# install python
 RUN pyenv install $py_version
 RUN pyenv global $py_version
 
-COPY . /root/src
-WORKDIR /root/src
-
-RUN pip install -r req/req.txt
+# install dependencies
+COPY req/req.txt /root/req.txt
+RUN pip install -r /root/req.txt
