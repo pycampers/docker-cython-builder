@@ -1,5 +1,7 @@
 FROM phusion/holy-build-box-64:latest
 
+RUN yum -y install git
+
 # install pyenv
 RUN curl https://pyenv.run | bash
 
