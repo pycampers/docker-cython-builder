@@ -3,10 +3,7 @@
 # Don't edit directly.
 #
 
-FROM quay.io/pypa/manylinux2010_x86_64
-
-# requirements from https://github.com/pyenv/pyenv/wiki
-RUN yum -y install gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel
+FROM phusion/holy-build-box-64:latest
 
 # install pyenv
 RUN curl https://pyenv.run | bash
@@ -15,10 +12,12 @@ RUN curl https://pyenv.run | bash
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
+# install python
 RUN pyenv install 3.5.7
 RUN pyenv global 3.5.7
 
-COPY . /root/src
-WORKDIR /root/src
+WORKDIR /root
 
-RUN pip install -r req/req.txt
+# install dependencies
+COPY req/req.txt .
+RUN pip install -r req.txt

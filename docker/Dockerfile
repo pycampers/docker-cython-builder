@@ -1,7 +1,4 @@
-FROM quay.io/pypa/manylinux2010_x86_64
-
-# requirements from https://github.com/pyenv/pyenv/wiki
-RUN yum -y install gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel
+FROM phusion/holy-build-box-64:latest
 
 # install pyenv
 RUN curl https://pyenv.run | bash
@@ -14,6 +11,8 @@ ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 RUN pyenv install $py_version
 RUN pyenv global $py_version
 
+WORKDIR /root
+
 # install dependencies
-COPY req/req.txt /root/req.txt
-RUN pip install -r /root/req.txt
+COPY req/req.txt .
+RUN pip install -r req.txt
